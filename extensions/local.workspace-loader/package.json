@@ -1,0 +1,25 @@
+{
+	"name": "workspace-loader",
+	"displayName": "Workspace Loader (ZIP)",
+	"description": "Loads a ZIP file from ?zip=<url> into the in-memory workspace.",
+	"version": "0.0.1",
+	"publisher": "local",
+	"engines": {
+		"vscode": "*"
+	},
+	"browser": "./extension.js",
+	"activationEvents": [
+		"*"
+	],
+	"contributes": {
+		"configuration": {
+			"properties": {
+				"workspaceLoader.zipUrl": {
+					"type": "string",
+					"default": "",
+					"description": "ZIP URL to populate the tmp:///workspace folder (set by index.html startup script from ?zip= URL param)"
+				}
+			}
+		}
+	}
+}
