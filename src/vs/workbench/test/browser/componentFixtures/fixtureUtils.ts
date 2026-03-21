@@ -537,7 +537,6 @@ type ThemedFixtures = ReturnType<typeof defineFixtureVariants>;
  */
 export function defineComponentFixture(options: ComponentFixtureOptions): ThemedFixtures {
 	const createFixture = (theme: typeof darkTheme | typeof lightTheme) => defineFixture({
-		isolation: 'none',
 		displayMode: { type: 'component' },
 		properties: [],
 		background: theme === darkTheme ? 'dark' : 'light',

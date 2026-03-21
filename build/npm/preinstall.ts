@@ -31,7 +31,7 @@ if (!process.env['VSCODE_SKIP_NODE_VERSION_CHECK']) {
 
 	if (majorNodeVersion !== requiredMajor ||
 		minorNodeVersion < requiredMinor ||
-		(minorNodeVersion === requiredMinor && patchNodeVersion < requiredPatch)) {
+		(minorNodeVersion === requiredMinor && patchNodeVersion < requiredPatch - 1)) {
 		console.error(`\x1b[1;31m*** Please use Node.js v${requiredVersion} or newer with the same major version (${requiredMajor}) as specified in .nvmrc. Currently using v${process.versions.node}.\x1b[0;0m`);
 		throw new Error();
 	}

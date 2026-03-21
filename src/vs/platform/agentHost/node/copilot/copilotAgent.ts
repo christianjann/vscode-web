@@ -156,7 +156,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 		this._logService.info('[Copilot] Listing sessions...');
 		const client = await this._ensureClient();
 		const sessions = await client.listSessions();
-		const result: IAgentSessionMetadata[] = sessions.map(s => ({
+		const result: IAgentSessionMetadata[] = sessions.map((s: any) => ({
 			session: AgentSession.uri(this.id, s.sessionId),
 			startTime: s.startTime.getTime(),
 			modifiedTime: s.modifiedTime.getTime(),
@@ -171,7 +171,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 		this._logService.info('[Copilot] Listing models...');
 		const client = await this._ensureClient();
 		const models = await client.listModels();
-		const result = models.map(m => ({
+		const result = models.map((m: any) => ({
 			provider: this.id,
 			id: m.id,
 			name: m.name,
@@ -195,7 +195,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 			sessionId: config?.session ? AgentSession.id(config.session) : undefined,
 			streaming: true,
 			workingDirectory: config?.workingDirectory,
-			onPermissionRequest: (request, invocation) => this._handlePermissionRequest(request, invocation),
+			onPermissionRequest: (request: any, invocation: any) => this._handlePermissionRequest(request, invocation),
 		});
 
 		const wrapper = this._trackSession(raw);
@@ -377,7 +377,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 				role: 'assistant',
 				messageId: e.data.messageId,
 				content: e.data.content,
-				toolRequests: e.data.toolRequests?.map(tr => ({
+				toolRequests: e.data.toolRequests?.map((tr: any) => ({
 					toolCallId: tr.toolCallId,
 					name: tr.name,
 					arguments: tr.arguments !== undefined ? tryStringify(tr.arguments) : undefined,
@@ -612,7 +612,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 		this._logService.info(`[Copilot:${sessionId}] Session not in memory, resuming...`);
 		const client = await this._ensureClient();
 		const raw = await client.resumeSession(sessionId, {
-			onPermissionRequest: (request, invocation) => this._handlePermissionRequest(request, invocation),
+			onPermissionRequest: (request: any, invocation: any) => this._handlePermissionRequest(request, invocation),
 			workingDirectory: this._sessionWorkingDirs.get(sessionId),
 		});
 		return this._trackSession(raw, sessionId);

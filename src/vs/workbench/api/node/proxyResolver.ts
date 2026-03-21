@@ -45,7 +45,7 @@ export function connectProxyResolver(
 	const loadLocalCertificates = useHostProxyDefault;
 	const isUseHostProxyEnabled = () => !isRemote || configProvider.getConfiguration('http').get<boolean>('useLocalProxyConfiguration', useHostProxyDefault);
 	const timedResolveProxy = createTimedResolveProxy(extHostWorkspace, mainThreadTelemetry);
-	const params: ProxyAgentParams = {
+	const params: any = {
 		resolveProxy: timedResolveProxy,
 		lookupProxyAuthorization: lookupProxyAuthorization.bind(undefined, extHostWorkspace, extHostLogService, mainThreadTelemetry, configProvider, {}, {}, initData.remote.isRemote, fallbackToLocalKerberos),
 		getProxyURL: () => getExtHostConfigValue<string>(configProvider, isRemote, 'http.proxy'),
@@ -214,7 +214,7 @@ function patchGlobalWebSocket(params: ProxyAgentParams, resolveProxyURL: (url: s
 		const originalWebSocket = globalThis.WebSocket;
 		// eslint-disable-next-line local/code-no-any-casts
 		(globalThis as any).__vscodeOriginalWebSocket = originalWebSocket;
-		globalThis.WebSocket = proxyAgent.createWebSocketPatch(params, originalWebSocket, resolveProxyURL);
+		globalThis.WebSocket = (proxyAgent as any).createWebSocketPatch(params, originalWebSocket, resolveProxyURL);
 	}
 }
 

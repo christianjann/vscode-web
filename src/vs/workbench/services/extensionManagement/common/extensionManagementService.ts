@@ -343,6 +343,9 @@ export class ExtensionManagementService extends CommontExtensionManagementServic
 		if (this.extensionManagementServerService.remoteExtensionManagementServer) {
 			return [this.extensionManagementServerService.remoteExtensionManagementServer];
 		}
+		if (this.extensionManagementServerService.webExtensionManagementServer) {
+			return [this.extensionManagementServerService.webExtensionManagementServer];
+		}
 		return undefined;
 	}
 

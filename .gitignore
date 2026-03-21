@@ -48,3 +48,4 @@ dist
 .agents/skills/.local/
 .claude/skills/.local/
 .github/skills/.local/
+scripts/dummy-extension/dummy-extension-0.0.1.vsix

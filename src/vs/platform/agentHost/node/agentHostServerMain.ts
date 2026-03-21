@@ -181,7 +181,8 @@ async function main(): Promise<void> {
 
 	if (options.enableMockAgent) {
 		// Dynamic import to avoid bundling test code in production
-		import('../test/node/mockAgent.js').then(({ ScriptedMockAgent }) => {
+		import('../test/node/mockAgent.js').then((module) => {
+			const { ScriptedMockAgent } = module as unknown as { ScriptedMockAgent: new () => IAgent };
 			const mockAgent = disposables.add(new ScriptedMockAgent());
 			registerAgent(mockAgent);
 		}).catch(err => {
